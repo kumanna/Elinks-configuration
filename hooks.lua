@@ -3,13 +3,13 @@ function sstrfind(s, pattern)
    return string.find(s, pattern, 1, true)
 end
 
+-- Reformat the Business Line website
 function blonnet_format_html_hook (html)
-   html = string.gsub(html, "<body ", '<body text="#000000"')
-   html = string.gsub(html, "<[Ff][Oo][Nn][Tt] class=leftnavi color=brown>.-</[Ff][Oo][Nn][Tt]>", '')
-   html = string.gsub(html, "<TD align=left vAlign=top width=\"500\"><IMG.-</FONT><BR>", '', 1)
-   html = string.gsub(html, "<A class=groupnavi href=\"http://epaper.thehindubusinessline.com/\">.-</FONT><BR>", '', 1)
-   html = string.gsub(html, "<[Aa]", "<a")
-   html = string.gsub(html, "(<[Aa] class=navi.-)<li>(.-</[Aa]>)", "<li>%1%2</li>")
+   html = string.gsub(html, "<body ", '<body text="#000000"') -- I like the text in black on the white background
+   html = string.gsub(html, "<[Ff][Oo][Nn][Tt] class=leftnavi color=brown>.-</[Ff][Oo][Nn][Tt]>", '') -- An ugly hack to remove the navigation bar
+   html = string.gsub(html, "<TD align=left vAlign=top width=\"500\"><IMG.-</FONT><BR>", '', 1) -- Remove description
+   html = string.gsub(html, "<A class=groupnavi href=\"http://epaper.thehindubusinessline.com/\">.-</FONT><BR>", '', 1) -- Remove other group links
+   html = string.gsub(html, "(<[Aa] class=navi.-)<li>(.-</[Aa]>)", "<li>%1%2</li>") -- Fix the erroneous section sidebar
    return html
 end
 
