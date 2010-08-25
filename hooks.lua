@@ -13,10 +13,12 @@ function blonnet_format_html_hook (html)
    return html
 end
 
+-- Use an alternate CSS for the Debian BTS to work around some quirks
 function debian_bts_format_html_hook (html)
    return string.gsub(html, "/css/bugs.css", 'file:///home/kumar/Kumar/bugs.css')
 end
 
+-- Make the status messages black on Mobile Twitter
 function mobile_twitter_format_hook(html)
    return string.gsub(html, ".status.-}", '.status {word-wrap: break-word; color : #000;}')
 end
