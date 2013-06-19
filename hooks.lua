@@ -23,6 +23,12 @@ function mobile_twitter_format_hook(html)
    return string.gsub(html, ".status.-}", '.status {word-wrap: break-word; color : #000;}')
 end
 
+-- Remove problematic characters from some pages
+function special_html_remove_hook(html)
+   return string.gsub(html, "&lrm;", "")
+end
+
+
 function pre_format_html_hook (url, html)
    if sstrfind (url, "blonnet.com") or sstrfind(url, "thehindubusinessline.com") then
       return blonnet_format_html_hook(html)
@@ -30,6 +36,8 @@ function pre_format_html_hook (url, html)
       return debian_bts_format_html_hook(html)
    elseif sstrfind (url, "mobile.twitter.com") then
       return mobile_twitter_format_hook(html)
+   elseif sstrfind (url, ".google.") then
+      return special_html_remove_hook(html)
    end
    return nil
 end
